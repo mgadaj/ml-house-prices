@@ -6,22 +6,22 @@ TARGET =
 PIPELINE_NAME =
 
 # variables
-FEATURES =
+VARIABLES =
 
 # variables to drop
-DROP_FEATURES =
+DROP_VARIABLES =
 
 # numerical variables with nan
-NUMERICAL_VAR_WITH_NAN =
+NUM_VARIABLES_WITH_NAN =
 
 # categorical variables with nan
-CATEGORICAL_VAR_WITH_NAN =
+CAT_VARIABLES_WITH_NAN =
 
 # temporal variables
-TEMPORAL_VAR =
+TEMP_VARIABLES =
 
 # variables to log transform
-NUMERICAL_VAR_LOG =
+NUM_VARIABLES_LOG =
 
 # categorical variables to encode
-CATEGORICAL_VAR_ENCODE =
+CAT_VARIABLES_ENCODE =
