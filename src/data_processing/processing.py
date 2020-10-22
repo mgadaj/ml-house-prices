@@ -3,37 +3,49 @@ import pandas as pd
 from sklearn.base import BaseEstimator, TransformerMixin
 
 # Impute missing values for categorical variable
-class ImputerCategorical(BaseEstimator, TransformerMixin):
+class ImputerCategoricalVar(BaseEstimator, TransformerMixin):
 
     def __init__(self, variables=None):
         self.variables = variables
 
-    def fit(self, X_train, y_train=None):
+    def fit(self, X, y=None):
         return self
 
-    def transform(self, X_train):
-        X_train = X_train.copy()
-        for variable in variables:
-            X_train[variable] = X_train[variable].fillna("Missing")
-        return X_train
+    def transform(self, X):
+        X = X.copy()
+        for variable in self.variables:
+            X[variable] = X[variable].fillna("Missing")
+        return X
 
 
 # Impute missing values for categorical variable
-class ImputerNumerical(BaseEstimator, TransformerMixin):
+class ImputerNumericalVar(BaseEstimator, TransformerMixin):
 
     def __init__(self, variables=None):
         self.variables = variables
 
-    def fit(self, X_train, y_train=None):
+    def fit(self, X, y=None):
         self.imputer_dict = {}
-
         for variable in self.variables:
-            self.imputer_dict[variable] = X_train[variable].mode()[0]
+            self.imputer_dict[variable] = X[variable].mode()[0]
         return self
 
-    def transform(self, X_train):
-        X_train = X_train.copy()
+    def transform(self, X):
+        X = X.copy()
         for variable in self.variables:
-            X_train[variable].fillna(self.imputer_dict[variable], inplace=True)
-        return X_train
+            X[variable].fillna(self.imputer_dict[variable], inplace=True)
+        return X
+
+
+class ProcessorTemporalVar(BaseEstimator, TransformerMixin):
+
+
+class EncoderRareLabel(BaseEstimator, TransformerMixin):
+
+
+class EncoderCategoricalVar(BaseEstimator, TransformerMixin):
+
+
+class TransformerLog(BaseEstimator, TransformerMixin):
+
 
