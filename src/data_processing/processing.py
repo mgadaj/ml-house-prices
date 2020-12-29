@@ -24,7 +24,7 @@ class ImputerNumericalVariable(BaseEstimator, TransformerMixin):
 
 
 # Imputation of missing values for categorical variables.
-# Replace missing values with new label: "Missing".
+# Replace missing values with new label: "missing_value".
 class ImputerCategoricalVariable(BaseEstimator, TransformerMixin):
 
     def __init__(self, variables=None):
@@ -36,24 +36,7 @@ class ImputerCategoricalVariable(BaseEstimator, TransformerMixin):
     def transform(self, X):
         X = X.copy()
         for variable in self.variables:
-            X[variable] = X[variable].fillna("Missing")
-        return X
-
-
-# Get the time elapsed between variable and the year in which the house was sold
-class ProcessorTemporalVariable(BaseEstimator, TransformerMixin):
-
-    def __init__(self, variables=None, reference_variable=None):
-        self.variables = variables
-        self.reference_variables = reference_variable
-
-    def fit(self, X, y=None):
-        return self
-
-    def transform(self, X):
-        X = X.copy()
-        for variable in self.variables:
-            X[variable] = X[self.reference_variables] - X[variable]
+            X[variable] = X[variable].fillna("missing_value")
         return X
 
 
@@ -73,7 +56,24 @@ class TransformerLogarithm(BaseEstimator, TransformerMixin):
         return X
 
 
-# Replace rare labels (which appear only in a small proportion of the observations) by the string "Rare".
+# Get the time elapsed between variable and the year in which the house was sold
+class ProcessorTemporalVariable(BaseEstimator, TransformerMixin):
+
+    def __init__(self, variables=None, related_variable=None):
+        self.variables = variables
+        self.related_variables = related_variable
+
+    def fit(self, X, y=None):
+        return self
+
+    def transform(self, X):
+        X = X.copy()
+        for variable in self.variables:
+            X[variable] = X[self.related_variables] - X[variable]
+        return X
+
+
+# Replace rare labels (which appear only in a small proportion of the observations) by the string "rare_label".
 class EncoderRareLabel(BaseEstimator, TransformerMixin):
 
     def __init__(self, tolerance, variables=None):
@@ -90,7 +90,22 @@ class EncoderRareLabel(BaseEstimator, TransformerMixin):
     def tranform(self, X):
         X = X.copy()
         for variable in self.variables:
-            X[variable] = np.where(X[variable].isin(self.rare_label_dict[variable]), X[variable], "Rare")
+            X[variable] = np.where(X[variable].isin(self.rare_label_dict[variable]), X[variable], "rare_label")
+        return X
+
+
+# Drop unnecessary variables.
+class DropSelectedVariable(BaseEstimator, TransformerMixin):
+
+    def __init__(self, variables=None):
+        self.variables = variables
+
+    def fit(self, X, y=None):
+        return self
+
+    def transform(self, X):
+        X = X.copy()
+        X = X.drop(self.variables, axis=1)
         return X
 
 
@@ -114,20 +129,3 @@ class EncoderCategoricalVariable(BaseEstimator, TransformerMixin):
         for variable in self.variables:
             X[variable] = X[variable].map(self.ordered_labels_dict[variable])
         return X
-
-
-# Drop unnecessary variables.
-class DropSelectedVariable(BaseEstimator, TransformerMixin):
-
-    def __init__(self, drop_variables=None):
-        self.variables = drop_variables
-
-    def fit(self, X, y=None):
-        return self
-
-    def transform(self, X):
-        X = X.copy()
-        X = X.drop(self.variables, axis=1)
-        return X
-
-

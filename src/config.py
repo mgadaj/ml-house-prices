@@ -1,27 +1,36 @@
-# data
-DATA_FILE =
-TARGET =
+# database
+DATA_NAME = "houseprices.csv"
+TARGET = "SalePrice"
 
-# pipeline
-PIPELINE_NAME =
+# model
+MODEL_NAME = "lasso_regression"
 
 # variables
-VARIABLES =
-
-# variables to drop
-DROP_VARIABLES =
-
-# numerical variables with nan
-NUM_VARIABLES_WITH_NAN =
+SELECTED_VARIABLES = ["MSSubClass", "MSZoning", "Neighborhood", "OverallQual",
+                      "OverallCond", "YearRemodAdd", "RoofStyle", "MasVnrType",
+                      "BsmtQual", "BsmtExposure", "HeatingQC", "CentralAir",
+                      "1tFlrSF", "GrLivArea", "BsmtFullBath", "KitchenQual",
+                      "Fireplaces", "FireplaceQu", "GarageType", "GarageFinish",
+                      "GarageCars", "PavedDrive", "YrSold"]
 
 # categorical variables with nan
-CAT_VARIABLES_WITH_NAN =
+CATEGORICAL_VARIABLES_WITH_NAN = ["MasVnrType", "BsmtQual", "BsmtExposure",
+                                  "Fireplaces", "GarageType", "GarageFinish"]
+# numerical variables with nan
+NUMERICAL_VARIABLES_WITH_NAN = ["LotFrontage"]
+
+# variables to drop
+DROP_VARIABLES = "YrSold"
 
 # temporal variables
-TEMP_VARIABLES =
-
-# variables to log transform
-NUM_VARIABLES_LOG =
+TEMPORAL_VARIABLES = "YearRemodAdd"
 
 # categorical variables to encode
-CAT_VARIABLES_ENCODE =
+CATEGORICAL_VARIABLES_ENCODE = ["MSZoning", "Neighborhood", "RoofStyle",
+                                "MasVnrType", "BsmtQual", "BsmtExposure",
+                                "HeatingQC", "CentralAir", "KitchenQual",
+                                "FireplaceQu", "GarageType", "GarageFinish",
+                                "PavedDrive"]
+
+# variables to logarithm transformation
+NUMERICAL_VARIABLES_LOGARITHM_TRANSFORM = ["LotFrontage", "1tFlrSF", "GrLivArea"]
