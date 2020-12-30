@@ -4,7 +4,7 @@ from sklearn.linear_model import Lasso
 import processing as ps
 import config as cfg
 
-model_pipe = Pipeline([
+model_pipeline = Pipeline([
     ("imputer_numerical_variable",
      ps.ImputerNumericalVariable(variables=cfg.NUMERICAL_VARIABLES_WITH_NAN)),
     ("imputer_categorical_variable",
@@ -24,5 +24,3 @@ model_pipe = Pipeline([
     ("linear_regression",
      Lasso(alpha=0.005, random_state=0))
 ])
-
-
