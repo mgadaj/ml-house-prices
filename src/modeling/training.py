@@ -2,13 +2,14 @@ import pandas as pd
 import numpy as np
 import joblib
 from sklearn.model_selection import train_test_split
-
 import config as cfg
 import pipeline as pl
+from pathlib import Path
 
 
 def activate_training():
-    data = pd.read_csv(cfg.DATA_NAME)
+    path_db = Path(__file__).parent.parent.parent / cfg.DATA_NAME
+    data = pd.read_csv(path_db)
     X = data[cfg.SELECTED_VARIABLES]
     y = data[cfg.TARGET]
 

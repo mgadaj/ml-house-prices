@@ -60,7 +60,7 @@ class TransformerLogarithm(BaseEstimator, TransformerMixin):
 class ProcessorTemporalVariable(BaseEstimator, TransformerMixin):
 
     def __init__(self, variables=None, related_variable=None):
-        self.variables = variables
+        self.variables = [variables]
         self.related_variables = related_variable
 
     def fit(self, X, y=None):
@@ -87,7 +87,7 @@ class EncoderRareLabel(BaseEstimator, TransformerMixin):
             self.rare_label_dict[variable] = list(frequent_var[frequent_var >= self.tolerance].index)
         return self
 
-    def tranform(self, X):
+    def transform(self, X):
         X = X.copy()
         for variable in self.variables:
             X[variable] = np.where(X[variable].isin(self.rare_label_dict[variable]), X[variable], "rare_label")

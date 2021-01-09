@@ -1,5 +1,5 @@
 # database
-DATA_NAME = "houseprices.csv"
+DATA_NAME = "data/raw/houseprices.csv"
 TARGET = "SalePrice"
 
 # model
@@ -9,9 +9,9 @@ MODEL_NAME = "lasso_regression"
 SELECTED_VARIABLES = ["MSSubClass", "MSZoning", "Neighborhood", "OverallQual",
                       "OverallCond", "YearRemodAdd", "RoofStyle", "MasVnrType",
                       "BsmtQual", "BsmtExposure", "HeatingQC", "CentralAir",
-                      "1tFlrSF", "GrLivArea", "BsmtFullBath", "KitchenQual",
+                      "1stFlrSF", "GrLivArea", "BsmtFullBath", "KitchenQual",
                       "Fireplaces", "FireplaceQu", "GarageType", "GarageFinish",
-                      "GarageCars", "PavedDrive", "YrSold"]
+                      "GarageCars", "PavedDrive", "LotFrontage", "YrSold"]
 
 # categorical variables with nan
 CATEGORICAL_VARIABLES_WITH_NAN = ["MasVnrType", "BsmtQual", "BsmtExposure",
@@ -33,4 +33,4 @@ CATEGORICAL_VARIABLES_ENCODE = ["MSZoning", "Neighborhood", "RoofStyle",
                                 "PavedDrive"]
 
 # variables to logarithm transformation
-NUMERICAL_VARIABLES_LOGARITHM_TRANSFORM = ["LotFrontage", "1tFlrSF", "GrLivArea"]
+NUMERICAL_VARIABLES_LOGARITHM_TRANSFORM = ["LotFrontage", "1stFlrSF", "GrLivArea"]
