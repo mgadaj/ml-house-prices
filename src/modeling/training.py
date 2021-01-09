@@ -2,8 +2,8 @@ import pandas as pd
 import numpy as np
 import joblib
 from sklearn.model_selection import train_test_split
-import config as cfg
-import pipeline as pl
+import src.config as cfg
+import src.data_processing.pipeline as pl
 from pathlib import Path
 
 

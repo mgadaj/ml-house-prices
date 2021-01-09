@@ -1,15 +1,17 @@
 import pandas as pd
 import joblib
-import config as cfg
+import src.config as cfg
 from pathlib import Path
 import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import r2_score, mean_squared_error
 
+
 def create_prediction(test_data):
     regressor = joblib.load(filename=cfg.MODEL_NAME)
     prediction = regressor.predict(test_data)
     return prediction
+
 
 if __name__ == "__main__":
     path_db = Path(__file__).parent.parent.parent / cfg.DATA_NAME

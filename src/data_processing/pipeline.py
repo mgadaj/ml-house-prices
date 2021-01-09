@@ -1,8 +1,9 @@
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.linear_model import Lasso
-import processing as ps
-import config as cfg
+import src.data_processing.processing as ps
+import src.config as cfg
+
 
 model_pipeline = Pipeline([
     ("imputer_numerical_variable",
